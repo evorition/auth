@@ -18,7 +18,7 @@ const userSchema = mongoose.Schema({
     passwordHash: String,
     status: {
         type: String,
-        default: "active",
+        default: "Active",
     },
     createdAt: {
         type: Date,

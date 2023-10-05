@@ -11,7 +11,7 @@ const verifyToken = (req, res, next) => {
 
     try {
         const decodedToken = jwt.verify(token, COOKIE_SECRET);
-        req.user = decodedToken;
+        req.userId = decodedToken.id;
         next();
     } catch (error) {
         return res.status(401).json({ message: "Tokens are different" });

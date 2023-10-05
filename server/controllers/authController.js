@@ -43,7 +43,7 @@ const signin = async (req, res) => {
         return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    if (user.status === "blocked") {
+    if (user.status === "Blocked") {
         return res.status(403).json({ message: "User is blocked" });
     }
 
@@ -54,7 +54,7 @@ const signin = async (req, res) => {
     const token = getToken(id);
     req.session.token = token;
 
-    res.status(200).json({ id: user.id, name: user.name });
+    res.json({ id: user.id, name: user.name });
 };
 
 const signout = async (req, res) => {

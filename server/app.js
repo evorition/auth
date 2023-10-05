@@ -8,6 +8,7 @@ const { MONGODB_URL, COOKIE_SECRET } = require("./utils/config");
 const errorHandler = require("./middlewares/errorHandler");
 
 const authRoutes = require("./routes/authRoutes");
+const usersRoutes = require("./routes/usersRoutes");
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(
 );
 
 app.use("/api/auth", authRoutes);
+app.use("/api/users", usersRoutes);
 
 app.use(errorHandler);
 
