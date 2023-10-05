@@ -50,7 +50,8 @@ const signin = async (req, res) => {
     user.lastLogin = Date.now();
     await user.save();
 
-    const token = getToken(user.id);
+    const id = user._id.toString();
+    const token = getToken(id);
     req.session.token = token;
 
     res.status(200).json({ id: user.id, name: user.name });
