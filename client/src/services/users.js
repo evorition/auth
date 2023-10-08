@@ -2,7 +2,7 @@ import axios from "axios";
 
 import storageService from "./storage";
 
-const baseUrl = "http://localhost:3000/api/users";
+const baseUrl = "/api/users";
 
 const getHeaders = () => {
     return {
