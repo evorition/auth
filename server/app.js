@@ -23,10 +23,11 @@ mongoose
 app.use(cors());
 app.use(express.json());
 
-app.use(express.static("dist"));
-
 app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
+
+app.use("/", express.static(__dirname + "/dist"));
+app.use("*", express.static(__dirname + "/dist"));
 
 app.use(errorHandler);
 
