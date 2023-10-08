@@ -1,10 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const cookieSession = require("cookie-session");
 require("express-async-errors");
 
-const { MONGODB_URL, COOKIE_SECRET } = require("./utils/config");
+const { MONGODB_URL } = require("./utils/config");
 const errorHandler = require("./middlewares/errorHandler");
 
 const authRoutes = require("./routes/authRoutes");
@@ -23,12 +22,6 @@ mongoose
 
 app.use(cors());
 app.use(express.json());
-app.use(
-    cookieSession({
-        name: "eternite-session",
-        keys: [COOKIE_SECRET],
-    })
-);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);

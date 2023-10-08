@@ -1,27 +1,23 @@
 const usersRouter = require("express").Router();
 
 const verifyToken = require("../middlewares/verifyToken");
-const checkIfUserBlocked = require("../middlewares/checkIfUserBlocked");
+const checkUserStatus = require("../middlewares/checkUserStatus");
 const usersController = require("../controllers/usersController");
 
-usersRouter.get(
-    "/",
-    [verifyToken, checkIfUserBlocked],
-    usersController.getUsers
-);
-usersRouter.delete(
-    "/",
-    [verifyToken, checkIfUserBlocked],
+usersRouter.get("/", [verifyToken, checkUserStatus], usersController.getUsers);
+usersRouter.post(
+    "/delete",
+    [verifyToken, checkUserStatus],
     usersController.deleteUsers
 );
 usersRouter.put(
     "/block",
-    [verifyToken, checkIfUserBlocked],
+    [verifyToken, checkUserStatus],
     usersController.updateStatusField("Blocked")
 );
 usersRouter.put(
     "/unblock",
-    [verifyToken, checkIfUserBlocked],
+    [verifyToken, checkUserStatus],
     usersController.updateStatusField("Active")
 );
 

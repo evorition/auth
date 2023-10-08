@@ -1,21 +1,24 @@
 const jwt = require("jsonwebtoken");
 
-const { COOKIE_SECRET } = require("../utils/config");
+const { SECRET } = require("../utils/config");
 
 const verifyToken = (req, res, next) => {
-    const token = req.session.token;
+    const authorization = req.get("authorization");
 
-    if (!token) {
-        return res.status(401).send({ message: "No token provided!" });
+    if (!authorization || !authorization.startsWith("Bearer ")) {
+        return res.status(401).send({ message: "No token provided" });
     }
+
+    const token = authorization.replace("Bearer ", "");
 
     try {
-        const decodedToken = jwt.verify(token, COOKIE_SECRET);
+        const decodedToken = jwt.verify(token, SECRET);
         req.userId = decodedToken.id;
-        next();
     } catch (error) {
-        return res.status(401).json({ message: "Tokens are different" });
+        res.status(401).json({ message: "Invalid token" });
     }
+
+    next();
 };
 
 module.exports = verifyToken;

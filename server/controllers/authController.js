@@ -52,14 +52,8 @@ const signin = async (req, res) => {
 
     const id = user._id.toString();
     const token = getToken(id);
-    req.session.token = token;
 
-    res.json({ id: user.id, name: user.name });
+    res.json({ id: user.id, name: user.name, token });
 };
 
-const signout = async (req, res) => {
-    req.session = null;
-    return res.sendStatus(200);
-};
-
-module.exports = { signup, signin, signout };
+module.exports = { signup, signin };
